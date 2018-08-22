@@ -1,9 +1,14 @@
 package de.prikril.ogn.backend.entity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Aircraft {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Aircraft.class);
 
     private static final int MINIMAL_DIFF_IN_SECS = 2;
 
@@ -25,10 +30,10 @@ public class Aircraft {
         long diffInSeconds = (timestamp - lastUpdate) / 1000;
         if (diffInSeconds > MINIMAL_DIFF_IN_SECS) {
             positions.add(position); //TODO: check if max_size exceeded
-            //System.out.println("New position added");
+            LOGGER.debug("New position added");
             lastUpdate = timestamp;
         }
-        //System.out.println(positions.size() + " positions");
+        LOGGER.debug(positions.size() + " positions");
     }
 
     public String getAddress() {

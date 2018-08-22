@@ -26,7 +26,7 @@ public class FlightPathController extends BaseController {
     public ResponseEntity<Aircraft> getDeviceById(@PathVariable(value = "address") String address) {
         return defaultAircraftBeaconListener.getAircraftByAddress(address)
                 .map(aircraft -> new ResponseEntity<>(aircraft, HttpStatus.OK))
-                .orElseGet(this::getEmptyResultItem);
+                .orElseGet(this::getEmptyResultErrorItem);
     }
 
 }

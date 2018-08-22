@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 
 public class BaseController {
 
-    protected ResponseEntity getEmptyResultItem(){
-        return new ResponseEntity<>("{}", HttpStatus.OK);
+    protected ResponseEntity getEmptyResultErrorItem(){
+        return new ResponseEntity<>("{}", HttpStatus.NOT_FOUND);
     }
 
 }
