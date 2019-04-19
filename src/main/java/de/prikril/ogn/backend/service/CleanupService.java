@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -30,26 +31,39 @@ public class CleanupService {
     }
 
     private void scheduleCleanup() {
+        if (scheduledExecutorService != null) {
+            scheduledExecutorService.shutdownNow();
+        }
+
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
         scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 
             @Override
             public void run() {
-                LOGGER.info("Before cleanup: {}", defaultAircraftBeaconListener.getAircraftMap().size());
-
-                for (Aircraft aircraft : defaultAircraftBeaconListener.getAircraftMap().values()) {
-                    long lastUpdate = aircraft.getLastUpdate();
-                    long nowTimestampInMs = new Date().getTime();
-                    long diffInSecs = (nowTimestampInMs - lastUpdate) / 1000;
-                    if (diffInSecs > CLEANUP_AFTER_MINUTES * 60) {
-                        defaultAircraftBeaconListener.getAircraftMap().remove(aircraft.getAddress());
-                    }
-                }
-
-                LOGGER.info("After cleanup: {}", defaultAircraftBeaconListener.getAircraftMap().size());
+                cleanupNow();
             }
         }, 0, CLEANUP_EVERY_MINUTES, TimeUnit.MINUTES);
+    }
+
+    public void cleanupNow() {
+        cleanupAircaftMap(defaultAircraftBeaconListener.getAircraftMap());
+    }
+
+    public void cleanupAircaftMap(Map<String, Aircraft> aircraftMap) {
+        LOGGER.info("Before cleanup: {}", aircraftMap.size());
+
+        for (Aircraft aircraft : aircraftMap.values()) {
+            long lastUpdate = aircraft.getLastUpdate();
+            long nowTimestampInMs = new Date().getTime();
+            long diffInSecs = (nowTimestampInMs - lastUpdate) / 1000;
+            if (diffInSecs > CLEANUP_AFTER_MINUTES * 60) {
+                LOGGER.debug("removing {} outdated since {} seconds", aircraft.getAddress(), diffInSecs);
+                aircraftMap.remove(aircraft.getAddress());
+            }
+        }
+
+        LOGGER.info("After cleanup: {}", aircraftMap.size());
     }
 
 

@@ -3,10 +3,11 @@ package de.prikril.ogn.backend.entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Aircraft {
+public class Aircraft implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Aircraft.class);
 

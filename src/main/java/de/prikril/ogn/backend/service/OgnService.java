@@ -5,8 +5,11 @@ import org.ogn.client.OgnClientFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PreDestroy;
+
 @Service
 public class OgnService {
+
     private OgnClient ognClient = OgnClientFactory.createClient();
 
 
@@ -15,4 +18,10 @@ public class OgnService {
         ognClient.subscribeToAircraftBeacons(defaultAircraftBeaconListener);
         ognClient.connect();
     }
+
+    @PreDestroy
+    private void disconnect() {
+        ognClient.disconnect();
+    }
+
 }

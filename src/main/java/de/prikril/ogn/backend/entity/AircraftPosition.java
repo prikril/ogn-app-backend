@@ -1,6 +1,8 @@
 package de.prikril.ogn.backend.entity;
 
-public class AircraftPosition {
+import java.io.Serializable;
+
+public class AircraftPosition implements Serializable {
 
     private double latitude;
     private double longitude;

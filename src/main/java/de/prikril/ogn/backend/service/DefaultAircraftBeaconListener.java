@@ -44,13 +44,19 @@ public class DefaultAircraftBeaconListener implements AircraftBeaconListener {
 
     public Optional<Aircraft> getAircraftByAddress(String address) {
         if (aircraftMap.containsKey(address)) {
+            LOGGER.info("Found {} positions for {}.", aircraftMap.get(address).getPositions().size(), address);
             return Optional.of(aircraftMap.get(address));
         }
 
+        LOGGER.info("Aircraft for {} was not found.", address);
         return Optional.empty();
     }
 
     public Map<String, Aircraft> getAircraftMap() {
         return aircraftMap;
+    }
+
+    public void setAircraftMap(Map<String, Aircraft> aircraftMap) {
+        this.aircraftMap = aircraftMap;
     }
 }
