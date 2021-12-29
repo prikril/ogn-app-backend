@@ -33,5 +33,5 @@ At command line type:
 
 If you want you can save logging output to file with:
 
-``nohup java -jar ogn-app-backend.jar --logging.file=logfile.log > /dev/null 2>&1 &``
+``nohup java -jar ogn-app-backend.jar --logging.file.name=logfile.log > /dev/null 2>&1 &``
 
