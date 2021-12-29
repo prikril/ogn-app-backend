@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogn-app-backend.iml" filepath="$PROJECT_DIR$/.idea/modules/ogn-app-backend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogn-app-backend_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ogn-app-backend_main.iml" group="ogn-app-backend" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogn-app-backend_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ogn-app-backend_test.iml" group="ogn-app-backend" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogn-app-backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ogn-app-backend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ogn-app-backend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ogn-app-backend.test.iml" />
     </modules>
   </component>
 </project>

@@ -21,7 +21,7 @@ public class FlightPathController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightPathController.class);
 
-    private DefaultAircraftBeaconListener defaultAircraftBeaconListener;
+    private final DefaultAircraftBeaconListener defaultAircraftBeaconListener;
 
     @Autowired
     public FlightPathController(DefaultAircraftBeaconListener defaultAircraftBeaconListener) {
@@ -31,7 +31,7 @@ public class FlightPathController extends BaseController {
     @GetMapping("/{address}")
     public ResponseEntity<Aircraft> getDeviceById(@PathVariable(value = "address") String address, HttpServletRequest request) {
 
-        LOGGER.info("Request flightPath for {} from {}", address, request.getRemoteAddr());
+        LOGGER.info("Request flightPath of {} from {}", address, request.getRemoteAddr());
 
         return defaultAircraftBeaconListener.getAircraftByAddress(address)
                 .map(aircraft -> new ResponseEntity<>(aircraft, HttpStatus.OK))

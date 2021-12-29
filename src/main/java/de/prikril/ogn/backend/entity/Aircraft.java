@@ -13,14 +13,14 @@ public class Aircraft implements Serializable {
 
     private static final int MINIMAL_DIFF_IN_SECS = 2;
 
-    private String address;
+    private final String address;
 
     /**
      * lastUpdate is unix timestamp in MS
      */
     private long lastUpdate;
 
-    private List<AircraftPosition> positions;
+    private final List<AircraftPosition> positions;
 
     public Aircraft(String address) {
         this.address = address;

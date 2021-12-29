@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class AircraftPosition implements Serializable {
 
-    private double latitude;
-    private double longitude;
+    private final double latitude;
+    private final double longitude;
 
-    private double altitudeInMeters;
+    private final double altitudeInMeters;
 
 
 

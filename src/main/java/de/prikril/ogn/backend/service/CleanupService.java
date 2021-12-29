@@ -20,7 +20,7 @@ public class CleanupService {
     private static final int CLEANUP_AFTER_MINUTES = 60;
     private static final int CLEANUP_EVERY_MINUTES = 1;
 
-    private DefaultAircraftBeaconListener defaultAircraftBeaconListener;
+    private final DefaultAircraftBeaconListener defaultAircraftBeaconListener;
 
     private ScheduledExecutorService scheduledExecutorService;
 
@@ -47,23 +47,23 @@ public class CleanupService {
     }
 
     public void cleanupNow() {
-        cleanupAircaftMap(defaultAircraftBeaconListener.getAircraftMap());
+        cleanupAircraftMap(defaultAircraftBeaconListener.getAircraftMap());
     }
 
-    public void cleanupAircaftMap(Map<String, Aircraft> aircraftMap) {
-        LOGGER.info("Before cleanup: {}", aircraftMap.size());
+    public void cleanupAircraftMap(Map<String, Aircraft> aircraftMap) {
+        LOGGER.info("Aircraft before cleanup: {}", aircraftMap.size());
 
         for (Aircraft aircraft : aircraftMap.values()) {
             long lastUpdate = aircraft.getLastUpdate();
             long nowTimestampInMs = new Date().getTime();
             long diffInSecs = (nowTimestampInMs - lastUpdate) / 1000;
             if (diffInSecs > CLEANUP_AFTER_MINUTES * 60) {
-                LOGGER.debug("removing {} outdated since {} seconds", aircraft.getAddress(), diffInSecs);
+                LOGGER.debug("Removing {} outdated since {} seconds", aircraft.getAddress(), diffInSecs);
                 aircraftMap.remove(aircraft.getAddress());
             }
         }
 
-        LOGGER.info("After cleanup: {}", aircraftMap.size());
+        LOGGER.info("Aircraft after cleanup: {}", aircraftMap.size());
     }
 
 

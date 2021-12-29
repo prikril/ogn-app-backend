@@ -21,9 +21,9 @@ public class BackupService {
 
     private final String BACKUP_PATH = "aircraft-backup.bin";
 
-    private DefaultAircraftBeaconListener defaultAircraftBeaconListener;
+    private final DefaultAircraftBeaconListener defaultAircraftBeaconListener;
 
-    private CleanupService cleanupService;
+    private final CleanupService cleanupService;
 
     @Autowired
     public BackupService(DefaultAircraftBeaconListener defaultAircraftBeaconListener, CleanupService cleanupService) {
@@ -37,29 +37,29 @@ public class BackupService {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(BACKUP_PATH));
             Map<String, Aircraft> aircraftMap = (Map<String, Aircraft>)objectInputStream.readObject();
-            LOGGER.info("read {} items from backup", aircraftMap.size());
-            cleanupService.cleanupAircaftMap(aircraftMap);
+            LOGGER.info("Read {} items from backup.", aircraftMap.size());
+            cleanupService.cleanupAircraftMap(aircraftMap);
             defaultAircraftBeaconListener.setAircraftMap(aircraftMap);
-            LOGGER.info("importing backup finished");
+            LOGGER.info("Importing backup finished.");
         } catch (Exception e) {
             // skip import
-            LOGGER.info("error while importing backup:");
+            LOGGER.info("Error while importing backup:");
             e.printStackTrace();
         }
     }
 
     @PreDestroy
     private void backupData() {
-        LOGGER.info("backing up data");
+        LOGGER.info("Backing up data...");
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(BACKUP_PATH));
             Map<String, Aircraft> aircraftMap = defaultAircraftBeaconListener.getAircraftMap();
             objectOutputStream.writeObject(aircraftMap);
-            LOGGER.info("wrote {} items to backup", aircraftMap.size());
-            LOGGER.info("backing up data finished");
+            LOGGER.info("Wrote {} items to backup.", aircraftMap.size());
+            LOGGER.info("Backing up data finished.");
         } catch (Exception e) {
             // skip backup
-            LOGGER.info("error while writing backup:");
+            LOGGER.info("Error while writing backup:");
             e.printStackTrace();
         }
     }

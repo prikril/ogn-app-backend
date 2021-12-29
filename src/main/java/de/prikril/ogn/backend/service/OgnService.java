@@ -10,7 +10,7 @@ import javax.annotation.PreDestroy;
 @Service
 public class OgnService {
 
-    private OgnClient ognClient = OgnClientFactory.createClient();
+    private final OgnClient ognClient = OgnClientFactory.createClient();
 
 
     @Autowired

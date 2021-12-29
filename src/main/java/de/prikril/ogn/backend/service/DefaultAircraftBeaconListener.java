@@ -48,7 +48,7 @@ public class DefaultAircraftBeaconListener implements AircraftBeaconListener {
             return Optional.of(aircraftMap.get(address));
         }
 
-        LOGGER.info("Aircraft for {} was not found.", address);
+        LOGGER.info("No positions found for aircraft {}.", address);
         return Optional.empty();
     }
 
