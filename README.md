@@ -5,17 +5,17 @@ The backend gathers aircraft positions from OGN.
 
 The backend offers a REST API to get the flight path for an aircraft.
 
-Current version: 0.2.0
+Current version: 0.4.0
 
 
 ## Dependencies
-The backend uses two repositories from wbuczak:
+The backend uses two repositories:
 
-https://github.com/wbuczak/ogn-commons-java
+https://github.com/prikril/ogn-commons-java
 
 and
 
-https://github.com/wbuczak/ogn-client-java
+https://github.com/prikril/ogn-client-java
 
 You need Eclipse and Maven to build the jar files.
 
