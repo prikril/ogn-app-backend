@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "idea"
-    id "org.springframework.boot" version "2.6.2"
+    id "org.springframework.boot" version "2.7.18"
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
@@ -14,7 +14,7 @@ jar {
 }
 
 group = "de.prikril.ogn.backend"
-version =  "0.4.0"
+version =  "0.4.1"
 
 repositories {
     mavenCentral()
@@ -24,17 +24,9 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-ext['log4j2.version'] = '2.17.0'
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web") {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.ogn:ogn-commons-java:2.0.0-SNAPSHOT'
     implementation 'org.ogn:ogn-client-java:1.0.0-SNAPSHOT'
